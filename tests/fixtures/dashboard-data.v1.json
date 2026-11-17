@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "workspace": {
+    "brand": "Harbor & Pine Coffee",
+    "updatedAt": "2026-10-02T15:20:00Z"
+  },
+  "brandHub": {
+    "tagline": "Small-batch coffee, roasted by the water.",
+    "voice": ["warm", "plain-spoken", "curious"],
+    "pillars": ["Origin stories", "Brewing tips", "Behind the roaster", "Cafe community"],
+    "colors": [
+      { "name": "Harbor Navy", "hex": "#1F3A4D" },
+      { "name": "Pine", "hex": "#2F5D50" },
+      { "name": "Crema", "hex": "#E9D8B9" },
+      { "name": "Ember", "hex": "#C2562E" }
+    ],
+    "approvedPhrases": ["Roasted by the water", "Brew it a little cooler", "Bean Club"],
+    "bannedPhrases": ["artisanal", "elevate", "healthiest", "best coffee in the world"],
+    "assets": [
+      { "name": "Logo pack", "type": "ZIP", "url": "https://harborandpine.example.com/brand/logo-pack.zip" },
+      { "name": "Photo library", "type": "Folder", "url": "https://harborandpine.example.com/brand/photos" },
+      { "name": "Brand guide", "type": "PDF", "url": "https://harborandpine.example.com/brand/guide.pdf" }
+    ]
+  },
+  "approvals": [
+    {
+      "id": "c-101",
+      "title": "Ethiopia Guji launch post",
+      "channel": "instagram",
+      "owner": "Maya Okafor",
+      "dueDate": "2026-10-04",
+      "status": "pending",
+      "preview": "New on the roaster: Ethiopia Guji. It tastes like blueberries and black tea."
+    },
+    {
+      "id": "c-102",
+      "title": "Why we buy from the same producers",
+      "channel": "linkedin",
+      "owner": "Maya Okafor",
+      "dueDate": "2026-10-05",
+      "status": "changes_requested",
+      "preview": "Every October we pick one coffee to tell a longer story about."
+    },
+    {
+      "id": "c-103",
+      "title": "Bean Club October newsletter",
+      "channel": "email",
+      "owner": "Theo Lindqvist",
+      "dueDate": "2026-10-06",
+      "status": "pending",
+      "preview": "Subject: Blueberries in a coffee cup?"
+    },
+    {
+      "id": "c-104",
+      "title": "Three ways to brew the Guji",
+      "channel": "instagram",
+      "owner": "Maya Okafor",
+      "dueDate": "2026-10-07",
+      "status": "approved",
+      "preview": "V60 for the brightest cup, AeroPress for a sweeter one."
+    },
+    {
+      "id": "c-105",
+      "title": "Wharf Street latte art night",
+      "channel": "instagram",
+      "owner": "Priya Raman",
+      "dueDate": "2026-10-09",
+      "status": "pending",
+      "preview": "Bring a friend, bring a mug, leave with a new skill."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "r-201",
+      "contentId": "c-102",
+      "note": "Please confirm the number of harvests with the buyer before this goes out.",
+      "requestedBy": "Maya Okafor",
+      "requestedAt": "2026-10-02T10:12:00Z",
+      "resolved": false
+    },
+    {
+      "id": "r-202",
+      "contentId": "c-103",
+      "note": "Subject line is fun but the preview text repeats it. Try leading with the tasting notes.",
+      "requestedBy": "Theo Lindqvist",
+      "requestedAt": "2026-10-02T13:40:00Z",
+      "resolved": false
+    },
+    {
+      "id": "r-203",
+      "contentId": "c-104",
+      "note": "Swap the French press photo for one from the cafe.",
+      "requestedBy": "Priya Raman",
+      "requestedAt": "2026-09-30T16:05:00Z",
+      "resolved": true
+    }
+  ],
+  "calendar": [
+    { "id": "k-301", "date": "2026-10-05", "channel": "instagram", "title": "Ethiopia Guji launch post", "pillar": "Origin stories", "status": "scheduled" },
+    { "id": "k-302", "date": "2026-10-06", "channel": "linkedin", "title": "Why we buy from the same producers", "pillar": "Behind the roaster", "status": "in_review" },
+    { "id": "k-303", "date": "2026-10-07", "channel": "email", "title": "Bean Club October newsletter", "pillar": "Origin stories", "status": "in_review" },
+    { "id": "k-304", "date": "2026-10-08", "channel": "instagram", "title": "Three ways to brew the Guji", "pillar": "Brewing tips", "status": "scheduled" },
+    { "id": "k-305", "date": "2026-10-10", "channel": "instagram", "title": "Wharf Street latte art night", "pillar": "Cafe community", "status": "planned" },
+    { "id": "k-306", "date": "2026-10-13", "channel": "instagram", "title": "Meet the roaster: Saturday shift", "pillar": "Behind the roaster", "status": "planned" },
+    { "id": "k-307", "date": "2026-10-15", "channel": "linkedin", "title": "Office coffee that people actually drink", "pillar": "Brewing tips", "status": "planned" },
+    { "id": "k-308", "date": "2026-10-20", "channel": "instagram", "title": "Colombia Huila arrives", "pillar": "Origin stories", "status": "planned" }
+  ],
+  "results": [
+    { "id": "m-401", "contentId": "c-090", "channel": "instagram", "title": "Kenya Nyeri farewell", "publishedOn": "2026-09-22", "impressions": 8420, "engagements": 612, "clicks": 143 },
+    { "id": "m-402", "contentId": "c-091", "channel": "linkedin", "title": "How we set green-coffee prices", "publishedOn": "2026-09-23", "impressions": 5130, "engagements": 288, "clicks": 97 },
+    { "id": "m-403", "contentId": "c-092", "channel": "email", "title": "Bean Club September newsletter", "publishedOn": "2026-09-24", "impressions": 3210, "engagements": 1540, "clicks": 402 },
+    { "id": "m-404", "contentId": "c-093", "channel": "instagram", "title": "Cold brew ratio cheat sheet", "publishedOn": "2026-09-26", "impressions": 11980, "engagements": 1103, "clicks": 214 },
+    { "id": "m-405", "contentId": "c-094", "channel": "instagram", "title": "Saturday cupping at Wharf Street", "publishedOn": "2026-09-28", "impressions": 2460, "engagements": 131, "clicks": 38 }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "brand": {
+    "name": "Harbor & Pine Coffee",
+    "tagline": "Small-batch coffee, roasted by the water.",
+    "website": "https://harborandpine.example.com",
+    "industry": "Specialty coffee roaster and two neighborhood cafes"
+  },
+  "audience": {
+    "primary": "Home brewers aged 25-45 who buy whole beans online",
+    "secondary": "Office managers ordering monthly coffee subscriptions",
+    "painPoints": [
+      "Grocery-store beans taste flat",
+      "Unsure which roast suits their brewer"
+    ]
+  },
+  "voice": {
+    "adjectives": ["warm", "plain-spoken", "curious"],
+    "do": [
+      "Write like a barista talking to a regular",
+      "Name the origin and the tasting notes",
+      "Keep sentences short"
+    ],
+    "dont": [
+      "Use the words 'artisanal' or 'elevate'",
+      "Use more than one exclamation mark per piece",
+      "Make health claims"
+    ],
+    "sampleLine": "This week's Ethiopia tastes like blueberries and black tea. Brew it a little cooler than usual."
+  },
+  "pillars": [
+    "Origin stories",
+    "Brewing tips",
+    "Behind the roaster",
+    "Cafe community"
+  ],
+  "channels": [
+    { "name": "instagram", "handle": "@harborandpine", "postsPerWeek": 4 },
+    { "name": "linkedin", "handle": "Harbor & Pine Coffee", "postsPerWeek": 2 },
+    { "name": "email", "list": "Bean Club newsletter", "postsPerWeek": 1 }
+  ],
+  "ctas": {
+    "primary": "Start a Bean Club subscription",
+    "primaryUrl": "https://harborandpine.example.com/bean-club",
+    "secondary": "Visit the Wharf Street cafe"
+  },
+  "compliance": {
+    "bannedClaims": ["healthiest", "cures", "best coffee in the world"],
+    "requiredDisclosures": ["Subscription renews monthly; cancel anytime."]
+  },
+  "approvals": {
+    "approver": "Maya Okafor",
+    "approverEmail": "maya.okafor@example.com"
+  },
+  "workspace": {
+    "mode": "auto",
+    "driveFolder": "Harbor & Pine / Content",
+    "calendarSheet": "Content Calendar",
+    "outputDir": "out"
+  }
+}

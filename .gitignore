@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+
+# Output and config from running the plugin inside this folder
+/out/
+/brand.config.json
+
+# Local dashboard data (exports, imports, saved copies)
+dashboard/data/*.local.json
+dashboard-data-v*.json

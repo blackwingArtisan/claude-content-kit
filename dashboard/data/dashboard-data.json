@@ -1,0 +1,562 @@
+{
+  "schemaVersion": 2,
+  "workspace": {
+    "brand": "Harbor & Pine Coffee",
+    "updatedAt": "2026-11-16T16:05:00Z"
+  },
+  "brandHub": {
+    "tagline": "Small-batch coffee, roasted by the water.",
+    "voice": [
+      "warm",
+      "plain-spoken",
+      "curious"
+    ],
+    "pillars": [
+      "Origin stories",
+      "Brewing tips",
+      "Behind the roaster",
+      "Cafe community"
+    ],
+    "colors": [
+      {
+        "name": "Harbor Navy",
+        "hex": "#1F3A4D"
+      },
+      {
+        "name": "Pine",
+        "hex": "#2F5D50"
+      },
+      {
+        "name": "Crema",
+        "hex": "#E9D8B9"
+      },
+      {
+        "name": "Ember",
+        "hex": "#C2562E"
+      }
+    ],
+    "approvedPhrases": [
+      "Roasted by the water",
+      "Brew it a little cooler",
+      "Bean Club"
+    ],
+    "bannedPhrases": [
+      "healthiest",
+      "cures",
+      "best coffee in the world",
+      "artisanal",
+      "elevate"
+    ],
+    "assets": [
+      {
+        "name": "Logo pack",
+        "type": "ZIP",
+        "url": "https://harborandpine.example.com/brand/logo-pack.zip"
+      },
+      {
+        "name": "Photo library",
+        "type": "Folder",
+        "url": "https://harborandpine.example.com/brand/photos"
+      },
+      {
+        "name": "Brand guide",
+        "type": "PDF",
+        "url": "https://harborandpine.example.com/brand/guide.pdf"
+      }
+    ]
+  },
+  "approvals": [
+    {
+      "id": "post-2026-11-30-instagram",
+      "title": "Bean Club, you're first in line.",
+      "channel": "instagram",
+      "dueDate": "2026-11-29",
+      "status": "approved",
+      "preview": "Bean Club, you're first in line. Winter Blend is yours today, November 30, a day before it goes on sale.\n\nColombia Huila and Ethiopia Guji, roasted medium. Dark chocolate, orange peel and brown sugar in the cup. 12 oz bag, $19.\n\nNot in Bean Club yet? Start a Bean Club subscription, link in bio.\nSubscription renews monthly; cancel anytime.",
+      "reviewer": "Maya Okafor",
+      "publishAt": "2026-11-30T08:00"
+    },
+    {
+      "id": "post-2026-12-01-instagram",
+      "title": "Two origins, one cup",
+      "channel": "instagram",
+      "dueDate": "2026-11-30",
+      "status": "approved",
+      "preview": "Winter Blend is on sale today.\n\nColombia Huila and Ethiopia Guji, roasted medium. Dark chocolate, orange peel and brown sugar. A 12 oz bag is $19.\n\nBean Club members got theirs first, on November 30. Start a Bean Club subscription, link in bio.\nSubscription renews monthly; cancel anytime.",
+      "reviewer": "Maya Okafor",
+      "publishAt": "2026-12-01T08:00"
+    },
+    {
+      "id": "post-2026-12-03-instagram",
+      "title": "Two origins, one bag.",
+      "channel": "instagram",
+      "dueDate": "2026-12-02",
+      "status": "pending",
+      "preview": "Two origins, one bag. Winter Blend brings together Colombia Huila and Ethiopia Guji, roasted medium.\n\nWhat do you taste? We get dark chocolate, orange peel and brown sugar.\n\n12 oz bag, $19. Start a Bean Club subscription, link in bio.\nSubscription renews monthly; cancel anytime.",
+      "reviewer": "Maya Okafor",
+      "publishAt": "2026-12-03T12:00"
+    },
+    {
+      "id": "post-2026-12-04-instagram",
+      "title": "Roast day for Winter Blend",
+      "channel": "instagram",
+      "dueDate": "2026-12-03",
+      "status": "changes_requested",
+      "preview": "Brewing Winter Blend this weekend? [BREWING TIP: method, grind or water temperature]\n\nMedium roast, with dark chocolate, orange peel and brown sugar in the cup.\n\nStart a Bean Club subscription, link in bio.\nSubscription renews monthly; cancel anytime.",
+      "reviewer": "Maya Okafor",
+      "publishAt": "2026-12-04T17:30"
+    },
+    {
+      "id": "post-2026-12-01-linkedin",
+      "title": "Winter Blend goes on sale today at Harbor & Pine Coffee.",
+      "channel": "linkedin",
+      "dueDate": "2026-11-30",
+      "status": "changes_requested",
+      "preview": "Winter Blend goes on sale today at Harbor & Pine Coffee.\n\nIt's Colombia Huila and Ethiopia Guji, roasted medium. The cup tastes of dark chocolate, orange peel and brown sugar. A 12 oz bag is $19.\n\nBean Club members got it first, on November 30.\n\nStart a Bean Club subscription: https://harborandpine.example.com/bean-club?utm_source=linkedin&utm_medium=social&utm_campaign=winter-blend-launch\nSubscription renews monthly; cancel anytime.",
+      "reviewer": "Maya Okafor",
+      "publishAt": "2026-12-01T12:00"
+    },
+    {
+      "id": "post-2026-12-03-linkedin",
+      "title": "From Huila and Guji to our roaster",
+      "channel": "linkedin",
+      "dueDate": "2026-12-02",
+      "status": "pending",
+      "preview": "Winter Blend starts with two origins: Colombia Huila and Ethiopia Guji.\n\nWe roast them medium. In the cup you'll find dark chocolate, orange peel and brown sugar. [ORIGIN DETAIL: farm, producer or altitude]\n\n12 oz bag, $19.\n\nStart a Bean Club subscription: https://harborandpine.example.com/bean-club?utm_source=linkedin&utm_medium=social&utm_campaign=winter-blend-launch\nSubscription renews monthly; cancel anytime.",
+      "reviewer": "Maya Okafor",
+      "publishAt": "2026-12-03T08:00"
+    },
+    {
+      "id": "email-bean-club-december-newsletter",
+      "title": "Bean Club December newsletter",
+      "channel": "email",
+      "dueDate": "2026-11-25",
+      "status": "pending",
+      "preview": "Subject: Winter Blend ships to Bean Club first, Nov 30\nPreview: Bean Club members get the new medium roast shipped a day before it goes on sale.\nTwo origins, one bag.",
+      "reviewer": "Maya Okafor"
+    }
+  ],
+  "revisionRequests": [
+    {
+      "id": "r-201",
+      "contentId": "post-2026-12-04-instagram",
+      "status": "open",
+      "openedBy": "Maya Okafor",
+      "openedAt": "2026-11-16T14:10:00Z",
+      "thread": [
+        {
+          "id": "r-201-m1",
+          "author": "Maya Okafor",
+          "body": "The brewing tip is still a placeholder. Can the roaster give us the Winter Blend pour-over recipe?",
+          "at": "2026-11-16T14:10:00Z"
+        },
+        {
+          "id": "r-201-m2",
+          "author": "Priya Raman",
+          "body": "Asked the head roaster. I'll paste the recipe in once it's confirmed.",
+          "at": "2026-11-16T14:42:00Z"
+        }
+      ]
+    },
+    {
+      "id": "r-202",
+      "contentId": "post-2026-12-01-linkedin",
+      "status": "open",
+      "openedBy": "Theo Lindqvist",
+      "openedAt": "2026-11-16T15:20:00Z",
+      "thread": [
+        {
+          "id": "r-202-m1",
+          "author": "Theo Lindqvist",
+          "body": "Open with the two origins rather than the sale. LinkedIn readers care more about sourcing.",
+          "at": "2026-11-16T15:20:00Z"
+        }
+      ]
+    },
+    {
+      "id": "r-203",
+      "contentId": "post-2026-11-30-instagram",
+      "status": "resolved",
+      "openedBy": "Maya Okafor",
+      "openedAt": "2026-11-16T11:05:00Z",
+      "thread": [
+        {
+          "id": "r-203-m1",
+          "author": "Maya Okafor",
+          "body": "Say \"ships\" rather than \"arrives\". We can't promise delivery dates.",
+          "at": "2026-11-16T11:05:00Z"
+        },
+        {
+          "id": "r-203-m2",
+          "author": "Priya Raman",
+          "body": "Changed. It now says the blend is yours today, a day before it goes on sale.",
+          "at": "2026-11-16T11:31:00Z"
+        }
+      ]
+    }
+  ],
+  "calendar": [
+    {
+      "id": "cal-2026-12-01-email",
+      "date": "2026-12-01",
+      "channel": "email",
+      "title": "Winter Blend is here: Huila meets Guji",
+      "pillar": "Origin stories",
+      "status": "planned",
+      "brief": "Announce that Winter Blend goes on sale today, pairing Colombia Huila and Ethiopia Guji. Mention that Bean Club members got first access on November 30 and link to Bean Club.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-01-instagram",
+      "date": "2026-12-01",
+      "channel": "instagram",
+      "title": "Two origins, one cup",
+      "pillar": "Origin stories",
+      "status": "scheduled",
+      "brief": "Launch-day carousel introducing Colombia Huila and Ethiopia Guji and what each brings to the blend. Use tasting notes from the roaster's cupping sheet.",
+      "owner": "Maya Okafor",
+      "contentId": "post-2026-12-01-instagram"
+    },
+    {
+      "id": "cal-2026-12-02-instagram",
+      "date": "2026-12-02",
+      "channel": "instagram",
+      "title": "How to brew Winter Blend at home",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Short reel with a starting recipe for the blend on a common home brewer. Invite followers to share their ratio.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-02-linkedin",
+      "date": "2026-12-02",
+      "channel": "linkedin",
+      "title": "Why we blend two origins",
+      "pillar": "Behind the roaster",
+      "status": "planned",
+      "brief": "Short post on the thinking behind pairing Colombia and Ethiopia in one blend. Keep it plain and personal, from the roaster's point of view.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-03-linkedin",
+      "date": "2026-12-03",
+      "channel": "linkedin",
+      "title": "From Huila and Guji to our roaster",
+      "pillar": "Origin stories",
+      "status": "in_review",
+      "brief": "Share the sourcing story for both lots in a few short sentences. Confirm producer and importer details with the team before posting.",
+      "owner": "Maya Okafor",
+      "contentId": "post-2026-12-03-linkedin"
+    },
+    {
+      "id": "cal-2026-12-04-instagram",
+      "date": "2026-12-04",
+      "channel": "instagram",
+      "title": "Roast day for Winter Blend",
+      "pillar": "Behind the roaster",
+      "status": "in_review",
+      "brief": "Behind-the-scenes clip of the roaster working through the blend. Explain in one plain line how the roast was chosen.",
+      "owner": "Maya Okafor",
+      "contentId": "post-2026-12-04-instagram"
+    },
+    {
+      "id": "cal-2026-12-06-instagram",
+      "date": "2026-12-06",
+      "channel": "instagram",
+      "title": "Sunday morning at Wharf Street",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Photo of an ordinary cafe moment on a cold morning. Invite locals to stop by for a cup.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-07-instagram",
+      "date": "2026-12-07",
+      "channel": "instagram",
+      "title": "Meet Ethiopia Guji",
+      "pillar": "Origin stories",
+      "status": "planned",
+      "brief": "Close-up on the Guji half of the blend and its tasting notes. Pull the notes from the cupping sheet.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-08-email",
+      "date": "2026-12-08",
+      "channel": "email",
+      "title": "Brewing Winter Blend three ways",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Give Bean Club members a simple recipe for each of three brewers. Invite replies with questions.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-08-linkedin",
+      "date": "2026-12-08",
+      "channel": "linkedin",
+      "title": "Three tips for better filter coffee",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Three short, practical tips for home brewers. Offer to answer brewer questions in the comments.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-09-instagram",
+      "date": "2026-12-09",
+      "channel": "instagram",
+      "title": "Brew it a little cooler",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Tip on adjusting water temperature and grind for a fruit-forward Ethiopian coffee. Tie it back to Winter Blend.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-10-linkedin",
+      "date": "2026-12-10",
+      "channel": "linkedin",
+      "title": "What the cafes teach the roaster",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Explain how counter conversations shape what gets roasted. Keep it honest and specific.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-11-instagram",
+      "date": "2026-12-11",
+      "channel": "instagram",
+      "title": "A day at the roaster",
+      "pillar": "Behind the roaster",
+      "status": "planned",
+      "brief": "Walk through a normal roasting day in a few frames. Keep it warm and unpolished.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-13-instagram",
+      "date": "2026-12-13",
+      "channel": "instagram",
+      "title": "The regulars' winter order",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Feature a favorite cold-weather drink from the cafe and the regular who orders it. Ask followers for theirs.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-14-instagram",
+      "date": "2026-12-14",
+      "channel": "instagram",
+      "title": "What \"single origin\" means",
+      "pillar": "Origin stories",
+      "status": "planned",
+      "brief": "Plain-language explainer with one example. Keep it to a single carousel.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-15-email",
+      "date": "2026-12-15",
+      "channel": "email",
+      "title": "Coffee gifts for people who love coffee",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Gift ideas for the coffee lover on your list, with Bean Club as one option [Confirm gift subscriptions are offered]. Include the subscription disclosure: \"Subscription renews monthly; cancel anytime.\"",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-15-linkedin",
+      "date": "2026-12-15",
+      "channel": "linkedin",
+      "title": "What a seasonal blend taught us",
+      "pillar": "Behind the roaster",
+      "status": "planned",
+      "brief": "Short reflection on launching a seasonal blend as a small roaster. Be candid about what was hard.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-16-instagram",
+      "date": "2026-12-16",
+      "channel": "instagram",
+      "title": "Winter Blend in two brewers",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Side-by-side of the blend in two common brewers and how they differ. Ask which one followers use.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-17-linkedin",
+      "date": "2026-12-17",
+      "channel": "linkedin",
+      "title": "How we choose what to buy",
+      "pillar": "Origin stories",
+      "status": "planned",
+      "brief": "Describe how the team decides which coffees to buy. Keep it concrete and brief.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-18-instagram",
+      "date": "2026-12-18",
+      "channel": "instagram",
+      "title": "Meet the person who packs your beans",
+      "pillar": "Behind the roaster",
+      "status": "planned",
+      "brief": "Profile of a team member who packs orders. Let them say what they like about the job.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-20-instagram",
+      "date": "2026-12-20",
+      "channel": "instagram",
+      "title": "Winter Blend at the bar",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Photo of the blend on the cafe bar with a cup beside it. Point to the Wharf Street cafe.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-21-instagram",
+      "date": "2026-12-21",
+      "channel": "instagram",
+      "title": "The shortest day, the cosiest cup",
+      "pillar": "Origin stories",
+      "status": "planned",
+      "brief": "Winter solstice post pairing a long evening with Winter Blend. [Confirm date.]",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-22-email",
+      "date": "2026-12-22",
+      "channel": "email",
+      "title": "A year at the roaster",
+      "pillar": "Behind the roaster",
+      "status": "planned",
+      "brief": "Look back on the year from the roaster's side, in a few short stories. Close with thanks to Bean Club members.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-22-linkedin",
+      "date": "2026-12-22",
+      "channel": "linkedin",
+      "title": "Coffee for the office holiday party",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Practical tips for office managers on quantity and brewing for a crowd. Mention Bean Club for monthly orders.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-23-instagram",
+      "date": "2026-12-23",
+      "channel": "instagram",
+      "title": "Brewing for a full house",
+      "pillar": "Brewing tips",
+      "status": "planned",
+      "brief": "Tips for making coffee for a crowd over the holidays. Suggest a batch brew method.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-23-linkedin",
+      "date": "2026-12-23",
+      "channel": "linkedin",
+      "title": "Thank you to our regulars",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Brief year-end thanks to the people who keep the cafes going. No sales pitch.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-26-instagram",
+      "date": "2026-12-26",
+      "channel": "instagram",
+      "title": "A thank-you from the roaster",
+      "pillar": "Behind the roaster",
+      "status": "planned",
+      "brief": "Short note of thanks from the roaster to customers. Keep it personal and quiet.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-12-27-instagram",
+      "date": "2026-12-27",
+      "channel": "instagram",
+      "title": "Our favorite cafe moments of 2026",
+      "pillar": "Cafe community",
+      "status": "planned",
+      "brief": "Photo roundup of moments from the cafe this year. Ask regulars to tag their own.",
+      "owner": "Maya Okafor"
+    },
+    {
+      "id": "cal-2026-11-30-instagram",
+      "date": "2026-11-30",
+      "channel": "instagram",
+      "title": "Bean Club, you're first in line.",
+      "pillar": "Cafe community",
+      "status": "scheduled",
+      "contentId": "post-2026-11-30-instagram"
+    },
+    {
+      "id": "cal-2026-12-03-instagram",
+      "date": "2026-12-03",
+      "channel": "instagram",
+      "title": "Two origins, one bag.",
+      "pillar": "Origin stories",
+      "status": "in_review",
+      "contentId": "post-2026-12-03-instagram"
+    },
+    {
+      "id": "cal-2026-12-01-linkedin",
+      "date": "2026-12-01",
+      "channel": "linkedin",
+      "title": "Winter Blend goes on sale today at Harbor & Pine Coffee.",
+      "pillar": "Behind the roaster",
+      "status": "in_review",
+      "contentId": "post-2026-12-01-linkedin"
+    }
+  ],
+  "results": [
+    {
+      "id": "m-401",
+      "contentId": "post-2026-11-02-instagram",
+      "channel": "instagram",
+      "title": "Colombia Huila is back",
+      "publishedOn": "2026-11-02",
+      "impressions": 8420,
+      "engagements": 612,
+      "clicks": 143
+    },
+    {
+      "id": "m-402",
+      "contentId": "post-2026-11-04-linkedin",
+      "channel": "linkedin",
+      "title": "How we set green-coffee prices",
+      "publishedOn": "2026-11-04",
+      "impressions": 5130,
+      "engagements": 288,
+      "clicks": 97
+    },
+    {
+      "id": "m-403",
+      "contentId": "email-bean-club-november-newsletter",
+      "channel": "email",
+      "title": "Bean Club November newsletter",
+      "publishedOn": "2026-11-05",
+      "impressions": 2310,
+      "engagements": 1108,
+      "clicks": 264
+    },
+    {
+      "id": "m-404",
+      "contentId": "post-2026-11-09-instagram",
+      "channel": "instagram",
+      "title": "Brew it a little cooler",
+      "publishedOn": "2026-11-09",
+      "impressions": 9875,
+      "engagements": 803,
+      "clicks": 121
+    },
+    {
+      "id": "m-405",
+      "contentId": "post-2026-11-12-instagram",
+      "channel": "instagram",
+      "title": "Saturday at Wharf Street",
+      "publishedOn": "2026-11-12",
+      "impressions": 6240,
+      "engagements": 455,
+      "clicks": 58
+    }
+  ]
+}

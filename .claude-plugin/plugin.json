@@ -1,0 +1,18 @@
+{
+  "name": "content-kit",
+  "displayName": "Content Kit",
+  "version": "0.1.0",
+  "description": "Content marketing commands driven by one brand config file: /content-kit:setup, social posts, email drafts and a content calendar, reviewed by a brand-voice editor and a fact-checker, with a format checker for the output. Saves files under out/; a Google Workspace path is written into the commands but untested.",
+  "icon": "./.claude-plugin/icon.png",
+  "author": {
+    "name": "blackwingArtisan"
+  },
+  "license": "MIT",
+  "keywords": [
+    "content-marketing",
+    "social-media",
+    "email",
+    "brand-voice",
+    "google-workspace"
+  ]
+}

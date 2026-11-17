@@ -1,0 +1,65 @@
+{
+  "comment": "Review activity layered on top of examples/out by scripts/build-sample-data.js. Names and links are invented.",
+  "updatedAt": "2026-11-16T16:05:00Z",
+  "reviewer": "Maya Okafor",
+  "emailDueDate": "2026-11-25",
+  "brandHub": {
+    "colors": [
+      { "name": "Harbor Navy", "hex": "#1F3A4D" },
+      { "name": "Pine", "hex": "#2F5D50" },
+      { "name": "Crema", "hex": "#E9D8B9" },
+      { "name": "Ember", "hex": "#C2562E" }
+    ],
+    "approvedPhrases": ["Roasted by the water", "Brew it a little cooler", "Bean Club"],
+    "assets": [
+      { "name": "Logo pack", "type": "ZIP", "url": "https://harborandpine.example.com/brand/logo-pack.zip" },
+      { "name": "Photo library", "type": "Folder", "url": "https://harborandpine.example.com/brand/photos" },
+      { "name": "Brand guide", "type": "PDF", "url": "https://harborandpine.example.com/brand/guide.pdf" }
+    ]
+  },
+  "reviews": {
+    "post-2026-11-30-instagram": "approved",
+    "post-2026-12-01-instagram": "approved"
+  },
+  "revisionRequests": [
+    {
+      "id": "r-201",
+      "contentId": "post-2026-12-04-instagram",
+      "status": "open",
+      "openedBy": "Maya Okafor",
+      "openedAt": "2026-11-16T14:10:00Z",
+      "thread": [
+        { "id": "r-201-m1", "author": "Maya Okafor", "body": "The brewing tip is still a placeholder. Can the roaster give us the Winter Blend pour-over recipe?", "at": "2026-11-16T14:10:00Z" },
+        { "id": "r-201-m2", "author": "Priya Raman", "body": "Asked the head roaster. I'll paste the recipe in once it's confirmed.", "at": "2026-11-16T14:42:00Z" }
+      ]
+    },
+    {
+      "id": "r-202",
+      "contentId": "post-2026-12-01-linkedin",
+      "status": "open",
+      "openedBy": "Theo Lindqvist",
+      "openedAt": "2026-11-16T15:20:00Z",
+      "thread": [
+        { "id": "r-202-m1", "author": "Theo Lindqvist", "body": "Open with the two origins rather than the sale. LinkedIn readers care more about sourcing.", "at": "2026-11-16T15:20:00Z" }
+      ]
+    },
+    {
+      "id": "r-203",
+      "contentId": "post-2026-11-30-instagram",
+      "status": "resolved",
+      "openedBy": "Maya Okafor",
+      "openedAt": "2026-11-16T11:05:00Z",
+      "thread": [
+        { "id": "r-203-m1", "author": "Maya Okafor", "body": "Say \"ships\" rather than \"arrives\". We can't promise delivery dates.", "at": "2026-11-16T11:05:00Z" },
+        { "id": "r-203-m2", "author": "Priya Raman", "body": "Changed. It now says the blend is yours today, a day before it goes on sale.", "at": "2026-11-16T11:31:00Z" }
+      ]
+    }
+  ],
+  "results": [
+    { "id": "m-401", "contentId": "post-2026-11-02-instagram", "channel": "instagram", "title": "Colombia Huila is back", "publishedOn": "2026-11-02", "impressions": 8420, "engagements": 612, "clicks": 143 },
+    { "id": "m-402", "contentId": "post-2026-11-04-linkedin", "channel": "linkedin", "title": "How we set green-coffee prices", "publishedOn": "2026-11-04", "impressions": 5130, "engagements": 288, "clicks": 97 },
+    { "id": "m-403", "contentId": "email-bean-club-november-newsletter", "channel": "email", "title": "Bean Club November newsletter", "publishedOn": "2026-11-05", "impressions": 2310, "engagements": 1108, "clicks": 264 },
+    { "id": "m-404", "contentId": "post-2026-11-09-instagram", "channel": "instagram", "title": "Brew it a little cooler", "publishedOn": "2026-11-09", "impressions": 9875, "engagements": 803, "clicks": 121 },
+    { "id": "m-405", "contentId": "post-2026-11-12-instagram", "channel": "instagram", "title": "Saturday at Wharf Street", "publishedOn": "2026-11-12", "impressions": 6240, "engagements": 455, "clicks": 58 }
+  ]
+}

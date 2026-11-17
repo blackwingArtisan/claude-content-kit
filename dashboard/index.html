@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Dashboard</title>
+<link rel="icon" href="data:,">
+<style>
+  :root {
+    --bg: #f6f3ee;
+    --surface: #ffffff;
+    --surface-2: #f0ebe3;
+    --text: #1d2327;
+    --muted: #5f6b72;
+    --line: #e2dbd0;
+    --accent: #1f3a4d;
+    --accent-text: #ffffff;
+    --pending: #8a5a00;
+    --pending-bg: #fdf0d5;
+    --ok: #1e6b4f;
+    --ok-bg: #dff2e9;
+    --warn: #a23a1c;
+    --warn-bg: #fbe3da;
+    --info: #24557a;
+    --info-bg: #e1edf7;
+    --radius: 10px;
+    --shadow: 0 1px 2px rgba(29, 35, 39, 0.06), 0 2px 8px rgba(29, 35, 39, 0.04);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181b; --surface: #1c2226; --surface-2: #242b30; --text: #e8ecee; --muted: #9aa6ad;
+      --line: #313a40; --accent: #8fb8d6; --accent-text: #0e1417;
+      --pending: #f0c36b; --pending-bg: #3a2f17; --ok: #7fd1ac; --ok-bg: #173229;
+      --warn: #f29a7d; --warn-bg: #3d221a; --info: #9cc6e8; --info-bg: #1a2c3b;
+      --shadow: none; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181b; --surface: #1c2226; --surface-2: #242b30; --text: #e8ecee; --muted: #9aa6ad;
+    --line: #313a40; --accent: #8fb8d6; --accent-text: #0e1417;
+    --pending: #f0c36b; --pending-bg: #3a2f17; --ok: #7fd1ac; --ok-bg: #173229;
+    --warn: #f29a7d; --warn-bg: #3d221a; --info: #9cc6e8; --info-bg: #1a2c3b;
+    --shadow: none; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  header.top { padding: 20px 0 0; }
+  .titlebar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  button, select, input[type="text"], textarea {
+    font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 12px;
+  }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  button:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible, [role="tabpanel"]:focus-visible, .card:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+  nav.tabs { display: flex; gap: 4px; margin-top: 18px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  [role="tab"] {
+    border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none;
+    padding: 10px 14px; color: var(--muted); white-space: nowrap; font-weight: 500;
+  }
+  [role="tab"][aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .count { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 6px; border-radius: 999px; background: var(--surface-2); font-size: 12px; text-align: center; }
+  main { padding: 20px 0 48px; }
+  .panel[hidden] { display: none; }
+  .grid { display: grid; gap: 12px; }
+  .cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .cards > .card { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+  .card .actions { margin-top: auto; }
+  .card h3 { margin: 0 0 4px; font-size: 15px; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .preview { margin: 10px 0 12px; padding: 10px 12px; background: var(--surface-2); border-radius: 8px; font-size: 14px; white-space: pre-line; max-height: 11.5em; overflow: auto; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .spread { justify-content: space-between; }
+  .pill { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .s-pending, .s-open, .s-planned { color: var(--pending); background: var(--pending-bg); }
+  .s-approved, .s-resolved, .s-scheduled, .s-published { color: var(--ok); background: var(--ok-bg); }
+  .s-changes_requested { color: var(--warn); background: var(--warn-bg); }
+  .s-in_review { color: var(--info); background: var(--info-bg); }
+  .chan { font-size: 12px; color: var(--muted); }
+  textarea { width: 100%; min-height: 70px; resize: vertical; margin: 8px 0; }
+  .thread { list-style: none; margin: 12px 0; padding: 0; display: grid; gap: 8px; }
+  .msg { padding: 8px 12px; border-left: 3px solid var(--line); background: var(--surface-2); border-radius: 0 8px 8px 0; }
+  .msg .who { font-size: 12px; color: var(--muted); }
+  .section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; }
+  .chip.bad { text-decoration: line-through; color: var(--warn); border-color: var(--warn-bg); }
+  .swatch { display: flex; gap: 10px; align-items: center; }
+  .swatch i { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line); flex: none; }
+  .kpis { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 16px; }
+  .kpi .label { font-size: 13px; color: var(--muted); }
+  .kpi .value { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .bar { display: flex; align-items: center; gap: 8px; min-width: 140px; }
+  .bar span { height: 8px; border-radius: 4px; background: var(--accent); }
+  .month { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .month .dow { background: var(--surface-2); padding: 6px 8px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .month .day { background: var(--surface); min-height: 96px; padding: 6px; font-size: 12px; }
+  .month .day.out { background: var(--surface-2); color: var(--muted); }
+  .month .num { font-weight: 600; margin-bottom: 4px; }
+  .slot { display: block; padding: 3px 6px; margin-bottom: 3px; border-radius: 5px; background: var(--surface-2); border-left: 3px solid var(--accent); line-height: 1.3; }
+  .agenda { display: none; }
+  .notice { padding: 14px 16px; border-radius: var(--radius); background: var(--warn-bg); color: var(--warn); margin-bottom: 16px; }
+  .notice.info { background: var(--info-bg); color: var(--info); }
+  footer { color: var(--muted); font-size: 12px; padding-bottom: 24px; }
+  dialog { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text); padding: 20px; max-width: 440px; width: calc(100% - 32px); }
+  dialog::backdrop { background: rgba(14, 20, 23, 0.45); }
+  dialog h2 { margin: 0 0 8px; font-size: 17px; }
+  dialog p { margin: 0 0 16px; color: var(--muted); }
+  dialog .row { justify-content: flex-end; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (max-width: 640px) {
+    nav.tabs { flex-wrap: wrap; overflow-x: visible; }
+    .month { display: none; }
+    .agenda { display: grid; gap: 8px; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="titlebar">
+      <div>
+        <h1 id="brand-name">Content Dashboard</h1>
+        <div class="sub" id="status-line">Loading data...</div>
+      </div>
+      <div class="controls">
+        <label class="sr-only" for="viewer">Viewing as</label>
+        <select id="viewer" title="Viewing as"></select>
+        <button type="button" id="export-btn">Export data</button>
+        <button type="button" id="import-btn" title="A dashboard JSON export, or a posting schedule, content calendar or email draft from Content Kit">Import file</button>
+        <button type="button" id="reset-btn">Reset to sample</button>
+        <input type="file" id="import-file" accept=".json,.csv,.md,application/json,text/csv,text/markdown" hidden>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Dashboard sections">
+      <button role="tab" id="tab-approvals" aria-controls="panel-approvals" aria-selected="true">Approvals<span class="count" id="count-approvals"></span></button>
+      <button role="tab" id="tab-revisions" aria-controls="panel-revisions" aria-selected="false" tabindex="-1">Revision requests<span class="count" id="count-revisions"></span></button>
+      <button role="tab" id="tab-brand" aria-controls="panel-brand" aria-selected="false" tabindex="-1">Brand hub</button>
+      <button role="tab" id="tab-results" aria-controls="panel-results" aria-selected="false" tabindex="-1">Results</button>
+      <button role="tab" id="tab-calendar" aria-controls="panel-calendar" aria-selected="false" tabindex="-1">Content calendar</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="notice"></div>
+    <section class="panel" id="panel-approvals" role="tabpanel" tabindex="0" aria-labelledby="tab-approvals"></section>
+    <section class="panel" id="panel-revisions" role="tabpanel" tabindex="0" aria-labelledby="tab-revisions" hidden></section>
+    <section class="panel" id="panel-brand" role="tabpanel" tabindex="0" aria-labelledby="tab-brand" hidden></section>
+    <section class="panel" id="panel-results" role="tabpanel" tabindex="0" aria-labelledby="tab-results" hidden></section>
+    <section class="panel" id="panel-calendar" role="tabpanel" tabindex="0" aria-labelledby="tab-calendar" hidden></section>
+  </main>
+  <footer id="footer"></footer>
+  <dialog id="confirm" aria-labelledby="confirm-title">
+    <form method="dialog">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-text"></p>
+      <div class="row">
+        <button type="button" id="confirm-export">Export it first</button>
+        <button value="cancel" id="confirm-cancel">Cancel</button>
+        <button value="replace" class="primary" id="confirm-replace">Replace</button>
+      </div>
+    </form>
+  </dialog>
+</div>
+
+<script src="migrate.js"></script>
+<script src="formats.js"></script>
+<script src="import.js"></script>
+<script>
+(function () {
+  'use strict';
+  const { CURRENT_VERSION, migrate, UnsupportedVersionError, DataIntegrityError } = window.DashboardMigrate;
+  const ContentImport = window.ContentKitImport;
+  const STORAGE_KEY = 'content-kit.dashboard';
+  const SAMPLE_URL = 'data/dashboard-data.json';
+  const PEOPLE = ['Maya Okafor', 'Theo Lindqvist', 'Priya Raman'];
+  const STATUS_LABEL = {
+    pending: 'Pending', approved: 'Approved', changes_requested: 'Changes requested',
+    open: 'Open', resolved: 'Resolved', planned: 'Planned', scheduled: 'Scheduled', in_review: 'In review', published: 'Published',
+  };
+  const CHANNEL_LABEL = { instagram: 'Instagram', linkedin: 'LinkedIn', facebook: 'Facebook', x: 'X', email: 'Email' };
+
+  let data = null;
+  let source = '';            // where the data came from, such as "imported from posts.csv"
+  let saveNote = '';          // whether the last change reached browser storage
+  let refused = null;         // saved data this template could not load: { raw, reason }
+  let viewer = PEOPLE[0];
+  let calendarMonth = null;
+
+  /* ---------- small DOM helper: text is always set with textContent ---------- */
+  function h(tag, attrs, ...children) {
+    const el = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (value === false || value == null) continue;
+      if (key === 'class') el.className = value;
+      else if (key.startsWith('on')) el.addEventListener(key.slice(2), value);
+      else el.setAttribute(key, value === true ? '' : value);
+    }
+    for (const child of children.flat()) {
+      if (child == null || child === false) continue;
+      el.append(child instanceof Node ? child : document.createTextNode(String(child)));
+    }
+    return el;
+  }
+  const text = (value) => (value == null ? '' : String(value));
+  const byText = (key) => (a, b) => text(a[key]).localeCompare(text(b[key]));
+  const channelName = (channel) => CHANNEL_LABEL[channel] || text(channel);
+  const pill = (status) => h('span', { class: `pill s-${status}` }, STATUS_LABEL[status] || status);
+  // Dates in imported files are not trusted to be valid; show them as written if they do not parse.
+  function fmtDate(value) {
+    const iso = text(value);
+    const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso) ? iso + 'T12:00:00' : iso);
+    return Number.isNaN(date.getTime()) ? iso : date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  }
+  function fmtTime(value) {
+    const date = new Date(text(value));
+    return Number.isNaN(date.getTime()) ? text(value)
+      : date.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  }
+  const fmtNum = (n) => (Number.isFinite(Number(n)) ? Number(n).toLocaleString() : '-');
+  const titleFor = (contentId) => (data.approvals.find((a) => a.id === contentId) || {}).title || contentId;
+
+  /* ---------- storage: one saved copy per viewer's browser, always versioned ---------- */
+  /** The saved copy as stored text, or null. Storage can be blocked, so this never throws. */
+  function readSavedText() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  }
+  function store() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); saveNote = 'saved in this browser'; refused = null; }
+    catch (e) { saveNote = 'not saved (browser storage unavailable)'; }
+  }
+  function save() {
+    data.workspace = { ...(data.workspace || {}), updatedAt: new Date().toISOString() };
+    store();
+    keepingFocus(render);
+  }
+  function download(name, text) {
+    const link = h('a', { href: URL.createObjectURL(new Blob([text], { type: 'application/json' })), download: name });
+    document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  }
+  /** Downloads the loaded data, or, if the saved copy was refused, that copy exactly as stored. */
+  function exportData() {
+    if (data) download(`dashboard-data-v${data.schemaVersion}.json`, JSON.stringify(data, null, 2));
+    else if (refused) download('dashboard-data-as-saved.json', refused.raw);
+  }
+
+  /** Asks in the page before saved data is replaced. Resolves true to go ahead. */
+  const confirmBox = document.getElementById('confirm');
+  function confirmReplace(title, message) {
+    document.getElementById('confirm-title').textContent = title;
+    document.getElementById('confirm-text').textContent = message;
+    document.getElementById('confirm-export').hidden = !data && !refused;
+    confirmBox.returnValue = '';
+    confirmBox.showModal();
+    document.getElementById('confirm-cancel').focus();
+    return new Promise((resolve) => {
+      confirmBox.addEventListener('close', () => resolve(confirmBox.returnValue === 'replace'), { once: true });
+    });
+  }
+  document.getElementById('confirm-export').addEventListener('click', exportData);
+
+  /**
+   * Panels are rebuilt after every change, which would drop keyboard focus to
+   * the page. Put it back on the same control, else the same card, else the panel.
+   */
+  function keepingFocus(update) {
+    const active = document.activeElement;
+    const inPanel = active && active.closest && active.closest('[role="tabpanel"]');
+    const control = inPanel && active.dataset.focus;
+    const card = inPanel && active.closest('[data-record]');
+    const record = card && card.dataset.record;
+    update();
+    if (!inPanel || (document.activeElement && document.activeElement !== document.body)) return;
+    const panel = document.getElementById(inPanel.id);
+    const find = (attr, value) => value && panel.querySelector(`[${attr}="${CSS.escape(value)}"]`);
+    (find('data-focus', control) || find('data-record', record) || panel).focus();
+  }
+
+  function showNotice(message, kind) {
+    const box = document.getElementById('notice');
+    box.replaceChildren(message ? h('div', { class: `notice ${kind || ''}`, role: 'status' }, message) : '');
+  }
+
+  const withEmptyCollections = (d) => ({ approvals: [], revisionRequests: [], calendar: [], results: [], brandHub: {}, ...d });
+
+  /**
+   * Shows `raw` if it can be upgraded and rendered; otherwise keeps what was
+   * there and says why. Returns null on success, else the reason.
+   */
+  function accept(raw, origin) {
+    const previous = { data, source };
+    try {
+      const upgraded = migrate(raw);
+      data = withEmptyCollections(upgraded);
+      source = origin;
+      calendarMonth = null;
+      if (upgraded !== raw) {
+        store();
+        showNotice(`Data upgraded from schema v${raw.schemaVersion} to v${CURRENT_VERSION}. All records were kept.`, 'info');
+      } else {
+        showNotice('');
+      }
+      render();
+      return null;
+    } catch (error) {
+      ({ data, source } = previous);
+      render();
+      const kept = error instanceof UnsupportedVersionError || error instanceof DataIntegrityError
+        ? ' Nothing was changed.' : '';
+      showNotice(`${error.message}${kept}`);
+      return error.message;
+    }
+  }
+
+  async function loadSample() {
+    const response = await fetch(SAMPLE_URL, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  }
+
+  /** Keeps saved data that cannot be loaded, so Export can still download it and nothing overwrites it unasked. */
+  function refuseSaved(raw, reason) {
+    refused = { raw, reason };
+    data = null;
+    render();
+    showNotice(`The data saved in this browser could not be loaded: ${reason} It has not been changed. ` +
+      'Export data downloads it exactly as saved; Reset to sample or Import file replaces it after asking.');
+  }
+
+  async function boot() {
+    const savedText = readSavedText();
+    if (savedText) {
+      let saved;
+      try { saved = JSON.parse(savedText); } catch (e) { refuseSaved(savedText, 'it is not valid JSON.'); return; }
+      saveNote = 'saved in this browser';
+      const reason = accept(saved, 'saved in this browser');
+      if (reason) refuseSaved(savedText, reason);
+      return;
+    }
+    try {
+      accept(await loadSample(), 'sample data');
+    } catch (e) {
+      document.getElementById('status-line').textContent = 'No data loaded';
+      showNotice('Could not load the sample data file. Start the local server with "npm run dashboard", or use Import file to open an export or a Content Kit file.');
+    }
+  }
+
+  /* ---------- tabs ---------- */
+  const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+  function selectTab(tab) {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    }
+    try { localStorage.setItem(STORAGE_KEY + '.tab', tab.id); } catch (e) { /* optional */ }
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', (event) => {
+      const target = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[event.key];
+      if (target === undefined) return;
+      event.preventDefault();
+      const next = tabs[(target + tabs.length) % tabs.length];
+      selectTab(next); next.focus();
+    });
+  });
+  try {
+    const remembered = document.getElementById(localStorage.getItem(STORAGE_KEY + '.tab'));
+    if (remembered && tabs.includes(remembered)) selectTab(remembered);
+  } catch (e) { /* optional */ }
+
+  /* ---------- actions ---------- */
+  function setApproval(item, status) { ContentImport.setReviewStatus(data, item.id, status); save(); }
+
+  /** Resolving the last open request on a card sends it back for approval; reopening one holds it again. */
+  function setRequestStatus(request, status) {
+    request.status = status;
+    const card = data.approvals.find((item) => item.id === request.contentId);
+    const stillOpen = data.revisionRequests.some((r) => r.contentId === request.contentId && r.status === 'open');
+    if (card && status === 'open') ContentImport.setReviewStatus(data, card.id, 'changes_requested');
+    if (card && !stillOpen && card.status === 'changes_requested') ContentImport.setReviewStatus(data, card.id, 'pending');
+    save();
+  }
+
+  function requestChanges(item, note) {
+    const now = new Date().toISOString();
+    const id = 'r-' + Date.now().toString(36);
+    data.revisionRequests.push({
+      id, contentId: item.id, status: 'open', openedBy: viewer, openedAt: now,
+      thread: [{ id: id + '-m1', author: viewer, body: note, at: now }],
+    });
+    ContentImport.setReviewStatus(data, item.id, 'changes_requested');
+    save();
+  }
+
+  function reply(request, body) {
+    request.thread = request.thread || [];
+    request.thread.push({ id: `${request.id}-m${request.thread.length + 1}`, author: viewer, body, at: new Date().toISOString() });
+    save();
+  }
+
+  /* ---------- panels ---------- */
+  function renderApprovals() {
+    const order = { pending: 0, changes_requested: 1, approved: 2 };
+    const rank = (item) => (item.status in order ? order[item.status] : 3);
+    const items = [...data.approvals].sort((a, b) => (rank(a) - rank(b)) || byText('dueDate')(a, b));
+    const cards = items.map((item) => {
+      const form = h('form', { hidden: true, onsubmit: (e) => {
+        e.preventDefault();
+        const note = form.querySelector('textarea').value.trim();
+        if (note) requestChanges(item, note);
+      } },
+        h('label', { class: 'sr-only', for: `note-${item.id}` }, 'What should change?'),
+        h('textarea', { id: `note-${item.id}`, placeholder: 'What should change?', required: true }),
+        h('div', { class: 'row' }, h('button', { class: 'primary', type: 'submit' }, 'Send request'),
+          h('button', { type: 'button', onclick: () => { form.hidden = true; } }, 'Cancel')));
+      return h('article', { class: 'card', 'data-record': item.id, tabindex: '-1' },
+        h('div', { class: 'row spread' }, h('span', { class: 'chan' }, channelName(item.channel)), pill(item.status)),
+        h('h3', null, item.title),
+        h('div', { class: 'meta' }, [
+          item.reviewer ? `Reviewer: ${item.reviewer}` : 'No reviewer yet',
+          item.dueDate ? `Due ${fmtDate(item.dueDate)}` : 'No due date',
+          item.publishAt ? `Publishes ${fmtTime(item.publishAt)}` : null,
+        ].filter(Boolean).join(' · ')),
+        h('div', { class: 'preview' }, item.preview),
+        item.status === 'approved'
+          ? h('div', { class: 'row actions' },
+              h('button', { type: 'button', 'data-focus': `pending-${item.id}`, onclick: () => setApproval(item, 'pending') }, 'Move back to pending'))
+          : h('div', { class: 'row actions' },
+              h('button', { class: 'primary', type: 'button', onclick: () => setApproval(item, 'approved') }, 'Approve'),
+              h('button', { type: 'button', onclick: () => { form.hidden = false; form.querySelector('textarea').focus(); } }, 'Request changes')),
+        form);
+    });
+    document.getElementById('panel-approvals').replaceChildren(h('div', { class: 'grid cards' }, cards));
+  }
+
+  function renderRevisions() {
+    const requests = [...data.revisionRequests].sort((a, b) =>
+      (a.status === 'open' ? 0 : 1) - (b.status === 'open' ? 0 : 1) || byText('openedAt')(b, a));
+    const cards = requests.map((request) => {
+      const box = h('textarea', { placeholder: 'Reply to this request', 'aria-label': 'Reply' });
+      return h('article', { class: 'card', 'data-record': request.id, tabindex: '-1' },
+        h('div', { class: 'row spread' }, h('h3', null, titleFor(request.contentId)), pill(request.status)),
+        h('div', { class: 'meta' }, `Opened by ${request.openedBy} · ${fmtTime(request.openedAt)}`),
+        h('ul', { class: 'thread' }, (request.thread || []).map((m) =>
+          h('li', { class: 'msg' }, h('div', { class: 'who' }, `${m.author} · ${fmtTime(m.at)}`), h('div', null, m.body)))),
+        h('div', { class: 'actions' },
+          request.status === 'open' ? box : null,
+          h('div', { class: 'row' },
+            request.status === 'open'
+              ? h('button', { class: 'primary', type: 'button', onclick: () => { const body = box.value.trim(); if (body) reply(request, body); } }, 'Reply')
+              : null,
+            h('button', { type: 'button', 'data-focus': `toggle-${request.id}`, onclick: () => setRequestStatus(request, request.status === 'open' ? 'resolved' : 'open') },
+              request.status === 'open' ? 'Mark resolved' : 'Reopen'))));
+    });
+    document.getElementById('panel-revisions').replaceChildren(
+      cards.length ? h('div', { class: 'grid cards' }, cards) : h('p', { class: 'meta' }, 'No revision requests yet.'));
+  }
+
+  function renderBrand() {
+    const b = data.brandHub || {};
+    const section = (title, ...body) => h('section', { class: 'card' }, h('h2', { class: 'section-title' }, title), ...body);
+    document.getElementById('panel-brand').replaceChildren(h('div', { class: 'grid cards' },
+      section('Tagline', h('p', { style: 'font-size:18px;margin:0' }, b.tagline || '')),
+      section('Voice', h('div', { class: 'chips' }, (b.voice || []).map((v) => h('span', { class: 'chip' }, v)))),
+      section('Content pillars', h('div', { class: 'chips' }, (b.pillars || []).map((p) => h('span', { class: 'chip' }, p)))),
+      section('Colors', h('div', { class: 'grid' }, (b.colors || []).map((c) =>
+        h('div', { class: 'swatch' }, h('i', { style: `background:${/^#[0-9a-f]{3,8}$/i.test(c.hex) ? c.hex : 'transparent'}` }),
+          h('div', null, h('div', null, c.name), h('div', { class: 'meta' }, c.hex)))))),
+      section('Phrases we use', h('div', { class: 'chips' }, (b.approvedPhrases || []).map((p) => h('span', { class: 'chip' }, p)))),
+      section('Phrases we avoid', h('div', { class: 'chips' }, (b.bannedPhrases || []).map((p) => h('span', { class: 'chip bad' }, p)))),
+      section('Brand assets', h('ul', { style: 'margin:0;padding-left:18px' }, (b.assets || []).map((a) =>
+        h('li', null, h('a', { href: /^https:\/\//.test(a.url) ? a.url : '#', target: '_blank', rel: 'noopener' }, a.name), ` (${a.type})`))))));
+  }
+
+  function renderResults() {
+    const rows = [...data.results].sort((a, b) => byText('publishedOn')(b, a));
+    const total = (key) => rows.reduce((sum, r) => sum + (Number(r[key]) || 0), 0);
+    const impressions = total('impressions'), engagements = total('engagements'), clicks = total('clicks');
+    const rate = (r) => (Number(r.impressions) > 0 ? (Number(r.engagements) || 0) / Number(r.impressions) : 0);
+    const maxRate = Math.max(...rows.map(rate), 0.0001);
+    const kpi = (label, value) => h('div', { class: 'card kpi' }, h('div', { class: 'label' }, label), h('div', { class: 'value' }, value));
+    document.getElementById('panel-results').replaceChildren(
+      h('div', { class: 'grid kpis' },
+        kpi('Impressions', fmtNum(impressions)),
+        kpi('Engagements', fmtNum(engagements)),
+        kpi('Engagement rate', impressions ? (100 * engagements / impressions).toFixed(1) + '%' : '-'),
+        kpi('Link clicks', fmtNum(clicks))),
+      h('div', { class: 'card table-wrap' }, h('table', null,
+        h('caption', { class: 'sr-only' }, 'Results by post'),
+        h('thead', null, h('tr', null, h('th', null, 'Post'), h('th', null, 'Channel'), h('th', null, 'Published'),
+          h('th', { class: 'num' }, 'Impressions'), h('th', { class: 'num' }, 'Clicks'), h('th', null, 'Engagement rate'))),
+        h('tbody', null, rows.map((r) => h('tr', null,
+          h('td', null, r.title), h('td', { class: 'chan' }, channelName(r.channel)), h('td', null, fmtDate(r.publishedOn)),
+          h('td', { class: 'num' }, fmtNum(r.impressions)), h('td', { class: 'num' }, fmtNum(r.clicks)),
+          h('td', null, h('div', { class: 'bar' },
+            h('span', { style: `width:${Math.round(90 * rate(r) / maxRate)}px` }),
+            (100 * rate(r)).toFixed(1) + '%'))))))));
+  }
+
+  function renderCalendar() {
+    const items = data.calendar.filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(text(item.date))).sort(byText('date'));
+    if (!calendarMonth) calendarMonth = (items[0] ? items[0].date : new Date().toISOString()).slice(0, 7);
+    const [year, month] = calendarMonth.split('-').map(Number);
+    const first = new Date(year, month - 1, 1);
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const lead = (first.getDay() + 6) % 7; // Monday first
+    const byDate = {};
+    for (const item of items) (byDate[item.date] = byDate[item.date] || []).push(item);
+    const iso = (d) => `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const slot = (item) => h('span', { class: 'slot', title: `${channelName(item.channel)} · ${item.pillar} · ${STATUS_LABEL[item.status] || item.status}` },
+      h('span', { class: 'chan' }, channelName(item.channel)), h('br'), item.title);
+
+    const cells = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => h('div', { class: 'dow' }, d));
+    const totalCells = Math.ceil((lead + daysInMonth) / 7) * 7;
+    for (let i = 0; i < totalCells; i += 1) {
+      const day = i - lead + 1;
+      const inMonth = day >= 1 && day <= daysInMonth;
+      cells.push(h('div', { class: `day${inMonth ? '' : ' out'}` },
+        inMonth ? h('div', { class: 'num' }, day) : null,
+        inMonth ? (byDate[iso(day)] || []).map(slot) : null));
+    }
+    const monthItems = items.filter((item) => item.date.startsWith(calendarMonth));
+    const shift = (delta) => {
+      const d = new Date(year, month - 1 + delta, 1);
+      calendarMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      keepingFocus(renderCalendar);
+    };
+    document.getElementById('panel-calendar').replaceChildren(
+      h('div', { class: 'row spread', style: 'margin-bottom:12px' },
+        h('h2', { style: 'margin:0;font-size:18px' }, first.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })),
+        h('div', { class: 'row' },
+          h('button', { type: 'button', 'data-focus': 'previous-month', onclick: () => shift(-1), 'aria-label': 'Previous month' }, 'Previous'),
+          h('button', { type: 'button', 'data-focus': 'next-month', onclick: () => shift(1), 'aria-label': 'Next month' }, 'Next'))),
+      h('div', { class: 'month' }, cells),
+      h('div', { class: 'agenda' }, monthItems.length ? monthItems.map((item) => h('div', { class: 'card' },
+        h('div', { class: 'row spread' }, h('strong', null, fmtDate(item.date)), pill(item.status)),
+        h('div', null, item.title), h('div', { class: 'meta' }, `${channelName(item.channel)} · ${item.pillar}`)))
+        : h('p', { class: 'meta' }, 'Nothing scheduled this month.')));
+  }
+
+  function render() {
+    if (!data) {
+      for (const panel of document.querySelectorAll('[role="tabpanel"]')) panel.replaceChildren();
+      document.getElementById('status-line').textContent = 'No data loaded';
+      return;
+    }
+    document.getElementById('brand-name').textContent = (data.workspace && data.workspace.brand) || 'Content Dashboard';
+    document.title = `${(data.workspace && data.workspace.brand) || 'Content'} Dashboard`;
+    const updated = data.workspace && data.workspace.updatedAt ? ` · updated ${fmtTime(data.workspace.updatedAt)}` : '';
+    const saved = saveNote && saveNote !== source ? ` · ${saveNote}` : '';
+    document.getElementById('status-line').textContent = `Data: ${source}${saved}${updated}`;
+    document.getElementById('count-approvals').textContent = data.approvals.filter((a) => a.status !== 'approved').length;
+    document.getElementById('count-revisions').textContent = data.revisionRequests.filter((r) => r.status === 'open').length;
+    document.getElementById('footer').textContent =
+      `Template supports data schema v${CURRENT_VERSION} · loaded data is schema v${data.schemaVersion} · data is stored separately from this template`;
+    renderApprovals(); renderRevisions(); renderBrand(); renderResults(); renderCalendar();
+  }
+
+  /* ---------- header controls ---------- */
+  const viewerSelect = document.getElementById('viewer');
+  viewerSelect.replaceChildren(...PEOPLE.map((p) => h('option', { value: p }, `Viewing as ${p}`)));
+  viewerSelect.addEventListener('change', () => { viewer = viewerSelect.value; });
+
+  document.getElementById('export-btn').addEventListener('click', exportData);
+
+  const fileInput = document.getElementById('import-file');
+  document.getElementById('import-btn').addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files[0];
+    fileInput.value = '';
+    if (!file) return;
+    const contents = await file.text();
+    if (/\.json$/i.test(file.name) || file.type === 'application/json') {
+      let raw;
+      try { raw = JSON.parse(contents); } catch (e) { showNotice(`Could not read ${file.name}: ${e.message}`); return; }
+      if (refused && !(await confirmReplace('Replace the saved data?',
+        `The data saved in this browser could not be loaded. Importing ${file.name} replaces it.`))) return;
+      if (!accept(raw, `imported from ${file.name}`)) save();
+      return;
+    }
+    importContent(file.name, contents);
+  });
+
+  /** Adds a Content Kit CSV or email draft to the loaded data. */
+  async function importContent(name, contents) {
+    let imported;
+    try {
+      imported = ContentImport.importFile(name, contents, { reviewer: viewer });
+    } catch (e) {
+      showNotice(`Could not import ${name}: ${e.message}. Nothing was changed.`);
+      return;
+    }
+    if (!data) {
+      if (refused && !(await confirmReplace('Replace the saved data?',
+        `The data saved in this browser could not be loaded. Importing ${name} starts new data in its place.`))) return;
+      data = withEmptyCollections({ schemaVersion: CURRENT_VERSION, workspace: {} });
+    }
+    const { data: merged, counts } = ContentImport.mergeImport(data, imported);
+    data = merged;
+    source = `imported from ${name}`;
+    calendarMonth = ContentImport.firstMonth(imported) || calendarMonth;
+    save();
+    showNotice(ContentImport.summarize(name, imported, counts), 'info');
+  }
+
+  document.getElementById('reset-btn').addEventListener('click', async () => {
+    if (readSavedText() !== null && !(await confirmReplace('Reset to the sample data?',
+      'This replaces the data saved in this browser. Export it first to keep a copy.'))) return;
+    let sample;
+    try { sample = await loadSample(); }
+    catch (e) { showNotice('Could not load the sample data file. Start the local server with "npm run dashboard".'); return; }
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* nothing saved */ }
+    refused = null;
+    saveNote = '';
+    accept(sample, 'sample data');
+  });
+
+  boot();
+})();
+</script>
+</body>
+</html>

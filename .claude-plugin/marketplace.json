@@ -1,0 +1,15 @@
+{
+  "name": "claude-content-kit",
+  "description": "Marketplace for the Content Kit plugin for Claude Code.",
+  "owner": {
+    "name": "blackwingArtisan"
+  },
+  "plugins": [
+    {
+      "name": "content-kit",
+      "source": "./",
+      "description": "Brand-driven content marketing commands and agents, driven by one brand config file.",
+      "category": "marketing"
+    }
+  ]
+}
