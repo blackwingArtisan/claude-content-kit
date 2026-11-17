@@ -136,7 +136,7 @@ In the browser, a file from a newer template is refused with "Dashboard data is 
 - **62 unit tests** (`npm test`, Node's built-in test runner, nothing to install), run in CI on Node 22 and 24: migrations and the record-loss guard; the output checker, its strict CSV parser and the email checks; the dashboard import and the sample-data build; the dashboard server (localhost only, path traversal, symlinks, unreadable files); and the plugin's manifests, commands, agents and skills. CI also checks the shipped examples and that the sample data matches them.
 - **23 browser checks** (`npm run test:browser`, needs Playwright): every tab; Approve, Request changes, reply, resolve and reopen, with cards and calendar entries moving together; reload; Export; CSV and email import, including bad quoting; v1 upgrade on import and on load; refusal of future-version and broken data, with Export still downloading the saved copy byte for byte; the in-page Reset confirmation; hostile HTML, `javascript:` links and CSS in imported data; keyboard tabs and focus; and a 390px layout. 23 of 23 passed in headless Chromium.
 - **Real plugin runs** of all three content commands, headless, in empty folders with no Google connector. Every output file passed the checker inside the run. Details in [`RUN.md`](examples/out/RUN.md).
-- **Install** from a local clone into a throwaway `CLAUDE_CONFIG_DIR`, and **`claude plugin validate . --strict`**.
+- **Install** from GitHub and from a local clone, each into a throwaway `CLAUDE_CONFIG_DIR`, and **`claude plugin validate . --strict`**.
 
 The checker exists because a model estimating lengths by eye is not reliable; code counts them instead.
 
